@@ -177,7 +177,7 @@ inline int toInt(double x)
     return int(pow(clamp(x), 1 / 2.2) * 255 + .5);
 }
 
-// Checks if ray intersects the sphere
+// Checks if ray intersects the spheres
 inline bool intersect(const Ray &r, double &t, int &id)
 {
     double n = sizeof(spheres) / sizeof(Sphere), d;
