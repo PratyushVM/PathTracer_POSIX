@@ -5,7 +5,7 @@ using namespace std;
 
 const double INF = 1e20;
 
-// GLOBAL DECLARATION
+// GLOBAL DEFINITION
 int h = 768, w = 1024, samps; // height, width and SPP
 
 double erand()
@@ -151,7 +151,7 @@ struct Sphere
     }
 };
 
-// Scene definition - hardcoded
+// Scene definition - hardcoded -could be modified to render different images
 Sphere spheres[] = {
     //Scene: radius, position, emission, color, material
     Sphere(1e5, Vec(1e5 + 1, 40.8, 81.6), Vec(), Vec(.75, .25, .25), DIFF),   //Left
@@ -293,9 +293,7 @@ Vec radiance(const Ray &r, int depth)
     }
 
     double Re = R0 + (1 - R0) * c * c * c * c * c, Tr = 1 - Re, P = .25 + .5 * Re, RP = Re / P, TP = Tr / (1 - P);
-    // return obj.e + f.mult(depth > 2 ? (erand() < P ? radiance(reflRay, depth) * RP
-    //                                                : radiance(Ray(x, tdir), depth) * TP)
-    //                                 : radiance(reflRay, depth) * Re + radiance(Ray(x, tdir), depth) * Tr);
+
     if (depth > 2)
     {
         if (erand() < P)
@@ -330,11 +328,7 @@ void *runner(void *arg)
 
     Vec r;
 
-    // m.lock();
-    // fprintf(stderr, "\rRendering (%d spp) %5.2f%%", samps * 4, 100. * y / (h - 1));
-    // m.unlock();
-
-    // Loop columnsr
+    // Loop columns
     for (unsigned short x = 0; x < w; x++)
     {
         // 2x2 subpixel rows
@@ -349,7 +343,7 @@ void *runner(void *arg)
                     Vec d = cx * (((sx + .5 + dx) / 2 + x) / w - .5) +
                             cy * (((sy + .5 + dy) / 2 + y) / h - .5) + cam.d;
                     r = r + radiance(Ray(cam.o + d * 140, d.norm()), 0) * (1. / samps);
-                } // Camera rays are pushed ^^^^^ forward to start in interior
+                } // Camera rays are pushed forward to start in interior
                 cc[i] = cc[i] + Vec(clamp(r.x), clamp(r.y), clamp(r.z)) * .25;
             }
         }
@@ -396,7 +390,7 @@ int main(int argc, char const *argv[])
     }
 
     // write image to ppm file
-    FILE *f = fopen("image.ppm", "w");
+    FILE *f = fopen("Rendered_image.ppm", "w");
     fprintf(f, "P3\n%d %d\n%d\n", w, h, 255);
     for (int i = 0; i < w * h; i++)
     {
