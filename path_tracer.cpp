@@ -400,5 +400,5 @@ int main(int argc, char const *argv[])
         fprintf(f, "%d %d %d ", toInt(c[i].x), toInt(c[i].y), toInt(c[i].z));
     }
     time_ = clock() - time_;
-    cout << "Time taken : " << (double)time_ / CLOCKS_PER_SEC << " seconds\n";
+    cout << "Processor Time taken : " << (double)time_ / CLOCKS_PER_SEC << " seconds\n";
 }
