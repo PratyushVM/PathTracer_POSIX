@@ -164,6 +164,7 @@ Sphere spheres[] = {
     Sphere(16.5, Vec(73, 16.5, 78), Vec(), Vec(1, 1, 1) * .999, REFR),        //Glass
     Sphere(600, Vec(50, 681.6 - .27, 81.6), Vec(12, 12, 12), Vec(), DIFF)     //Light
 };
+// alternate scene definitions can be found in https://www.kevinbeason.com/smallpt/extraScenes.txt
 
 // clamps value between 0 and 1
 inline double clamp(double x)
