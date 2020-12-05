@@ -377,8 +377,8 @@ int main(int argc, char const *argv[])
 
     pthread_t threads[h];
 
-    double time_;
-    time_ = clock();
+    // double time_;
+    // time_ = clock();
 
     // parallel code
     // spawn threads for each row of the image
@@ -400,6 +400,6 @@ int main(int argc, char const *argv[])
     {
         fprintf(f, "%d %d %d ", toInt(c[i].x), toInt(c[i].y), toInt(c[i].z));
     }
-    time_ = clock() - time_;
-    cout << "Processor Time taken : " << (double)time_ / CLOCKS_PER_SEC << " seconds\n";
+    // time_ = clock() - time_;
+    // cout << "Processor Time taken : " << (double)time_ / CLOCKS_PER_SEC << " seconds\n";
 }
